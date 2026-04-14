@@ -1,0 +1,10 @@
+DONE
+Strona tytułowa | Szymon Kodura
+Wizja systemu | Szymon Kodura, Albert Starosta
+Historyjki | Albert Starosta, Marcin Będkowski
+Wymagania użystkowników | Szymon Kodura, Albert Starosta, Marcin Będkowski
+
+TODO
+Kompletne kryteria akceptacji i scenariusze testowe w formacie GW
+projekt flow użytkownika (diagram aktywności)
+wizualizacja w postaci interaktywnego prototypu interfejsu w wersji low (szkice bez szczegółów graficznych).
