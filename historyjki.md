@@ -34,6 +34,10 @@ Jako magazynier chcę potwierdzić odebranie sprzętu po renowacji, aby uaktualn
 
 ## Klient
 
+Jako klient chcę móc się zarejestrować do systemu aby móc korzystać z usług wypożyczalni
+
+Jako klient chcę móc się zalogować do systemu aby móc korzystać z usług wypożyczalni
+
 Jako klient chcę przeglądać listę wypożyczonego przeze mnie sprzętu wraz z informacją o terminie zwrotu, aby umiejętnie zagospodarować czas przeznaczony na wykorzystanie sprzętu
 
 Jako klient chcę wnioskować o przedłużenie wypożyczenia, aby móc elastycznie dostosowywać jego czas do zachodzących potrzeb oraz okazji wykorzystania
