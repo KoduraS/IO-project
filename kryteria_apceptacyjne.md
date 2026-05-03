@@ -152,6 +152,8 @@ Kryteria funkcjonalne:
 - Formularz zawiera nieobligatoryjne pola:
   - adres email
 - System zapisuje dane klienta w bazie danych po zatwierdzeniu przez operatora wypożyczeń
+- Przy zapisie system generuje unikalny indentyfiaktor klienta w bazie danych
+- System automatycznie zapisuej aktualną datę i godzinę jako czas wydania sprzętu
 - Jeżeli w bazie istnieje już klient o tym samym unikalnym identyfikatorze, system odrzuca zapis nowego klienta do bazy i informuje operatora o występującym duplikacie
 - Jeżeli obligatoryjne pole nie zostało uzupełnione, w momencie zatwierdzenia formularza system go odrzuci i wskaże nieuzupełnione pola
 - Jeżeli pole zostało wypełnione niezgodnie z formatem (np. błędny zapis adresu email) system w momencie zatwierdzania odrzuci formularz i wskaże błędnie wypełnione pola
@@ -166,25 +168,61 @@ Kryteria funkcjonalne:
 - System umożliwia dodanie klienta z listy klientów
 - System udostępnia skrót do dodania nowego klienta, który automatycznie zostanie podpięty pod aktualnie rejestrowane wydanie sprzętu
 - System udostępnia interfejs kalendarza pozwalający na wybranie okresu wypożyczenia
-- System udostępnia listę dostępnego sprzętu sportowego
-- System pozwala na wyszukiwanie sprzętu po nazwie
-- System umożliwia filtrowanie sprzętu według kategorii (np. sporty zimowe, wodne itd.)
-- System umożliwia sortowanie sprzętu wg ceny wypożycznia na jeden dzień, liczby dni eksploatacji, popularności danego modelu sprzętu
-- Sytem umożliwia sortowanie wg wielu kryteriów jednocześnie, wg wybranej hierarchi priorytetowości poszczególnych kryteriów
+- System umożliwia wybranie sprzętu z przeglądu wyposażenia zawężonego do sprzętów dostępnych
+- System udostępnia mechanizm powiadamiania magazyniera o konieczności wydania sprzętu z magazynu na stanowisko operatora wypożyczeń, wyzwalany w momencie potwierdzenia wyboru sprzętu w formularzu wydania
+- System umożliwia zatwierdzenie wydania sprzętu
 
 ## Jako operator wypożyczeń chcę zarejestrować zwrot sprzętu przez klienta, aby uregulować ewentualne należności z tytułu uszkodzeń sprzętu lub opóźnionego zwrotu oraz uaktualnić stan magazynowy
 
 Kryteria funkcjonalne:
+- System umożliwa wyszukanie klienta w bazie danych
+- System umożliwia wybranie klienta z bazy danych
+- System udostępnia listę sprzętu wypożyczonego przez wybranego klienta
+- System umożliwia wybranie sprzętu z listy sprzętów klienta celem przejścia do formularza zwrotu
+- System umożliwia odnotowywanie zaistniałych w wyniku eksploatacji przez klienta usterek w polu tekstowym
+- System automatycznie wypełnia pola 'data wypożycznia' i 'data zwrotu' zgodnie z zegarem systemowym
+- System automatycznie oblicza wysokość należności z tytułu opóźnień w zwrocie sprzętu
 
+## Jako operator wypożyczeń chcę przeglądać całe wyposażenie należące do wypożyczalni
 
-Jako operator wypożyczeń chcę przeglądać dostępne w magazynie wyposażenie do wypożyczenia, aby udzielić klientowi pełnej informacji
+Kryteria funkcjonalne:
+- System udostępnia listę sprzętu sportowego
+- System pozwala na wyszukiwanie sprzętu po nazwie
+- System umożliwia filtrowanie sprzętu według kategorii (np. sporty zimowe, wodne itd.)
+- System udostępnia następujące klasy kategorii i podkategorii:
+  - tematyczne:
+    - sporty zimowe
+      - narciarstwo
+      - snowboarding
+      - ...
+    - sporty wodne
+      - kajakarstwo
+      - wędkowanie
+      - nurkowanie
+      - ...
+    - kolarstwo
+    - ...
+  - dostępność:
+    - dostępny
+    - wypożyczony
+    - w naprawie
+- System umożliwia sortowanie sprzętu wg ceny wypożycznia na jeden dzień, liczby dni eksploatacji, popularności danego modelu sprzętu
+- Sytem umożliwia sortowanie wg wielu kryteriów jednocześnie, wg wybranej hierarchi priorytetowości poszczególnych kryteriów
+- System umożliwia rozpoczęcie procedury rejestracji wydania sprzętu z poziomu przeglądu szczegółów konkretnego sprzętu, pod warunkiem, że sprzęt jest dostępny
 
-Jako operator wypożyczeń chcę przeglądać listę sprzętu wypożyczonego, aby udzielić pełnej informacji klientowi
+## Jako operator wypożyczeń chcę rozpatrywać wnioski klientów o przedłużenie wypożyczenia, aby równoważyć potrzeby klientów posiadających wypożyczony sprzęt oraz chcących wypożyczyć
 
-Jako operator wypożyczeń chcę rozpatrywać wnioski klientów o przedłużenie wypożyczenia, aby równoważyć potrzeby klientów posiadających wypożyczony sprzęt oraz chcących wypożyczyć
+Kryteria funkcjonalne:
+- System powiadamia operatorów o wnioskoach klientów poprzez SMS na nr służbowy
+- System na głównym ekranie aplikacji wyświetla listę wniosków klientów
+- System umożliwia przejście do szczegółów wniosku
+- System umożliwia zatwierdzenie lub odrzucenie wniosku
+- System udostępnia opcję zatwierdzenia wniosku na krótszy niż wskazany we wniosku okres z opcjonalną zgodą klienta na skrócony okres przedłużenia (brak zgody klienta jest równoznaczny z odrzuceniem wniosku)
 
-Jako operator wypożyczeń chcę odnotowywać zaistniałe usterki powstałe w wyniku eksploatacji sprzętu przez klienta, aby prowadzić dokumentację stanu sprzętu i mieć podstawy do pokrycia kosztów naprawy przez klienta
+## Jako operator wypożyczeń chciałbym mieć dostęp do historii wypożyczonych sprzętów klienta, aby móc lepiej doradzić klientowi w wyborze sprzętu
 
-Jako operator wypożyczeń chciałbym mieć dostęp do historii wypożyczonych sprzętów klienta, aby móc lepiej doradzić klientowi w wyborze sprzętu
+Kryteria funkcjonalne:
+- System udostępnia przegląd sprzętów wypożyczonych w przeszłości i aktualnie przez klienta na zasadach filtracji i sortowania dostępnych w głównym przeglądzie sprzętu
+- System umożliwia filtrowanie sprzętów klienta na aktualnie wypożyczone i wypożyczone w przeszłości
 
 Jako operator wypożyczeń chciałbym mieć dostęp do historii danego sprzętu, aby móc prowadzić statystyki dotyczące wypożyczanego sprzętu oraz klientów
