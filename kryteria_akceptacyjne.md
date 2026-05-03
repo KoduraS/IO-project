@@ -240,7 +240,8 @@ Kryteria funkcjonalne:
 ## Jako operator wypożyczeń chciałbym mieć dostęp do historii danego sprzętu, aby móc prowadzić statystyki dotyczące wypożyczanego sprzętu oraz klientów
 Kryteria funkcjonalne:
 - System udostępnia przegląd okresów wypożyczeń sprzętu i okresów napraw
-- Okres wypożyczenia zawiera:
+- System umożliwia przegladanie szczegółów poszczególnych okresów
+- Szczegółowy opis okres wypożyczenia zawiera:
   - datę początkową i końcową wypożyczenia,
   - pierwotnie planowaną datę zwrotu i wszystkie planowane daty końcowe zaistniałe w wyniku przedłużeń
   - dane klienta wypożyczającego sprzęt
@@ -249,6 +250,8 @@ Kryteria funkcjonalne:
   - koszt opoźnienia w zwrocie
   - cenę wypożyczenia na jeden dzień
   - koszt opóźnienia w zwrocie o jeden dzień
+
+
 
 # Magazynier
 ---
