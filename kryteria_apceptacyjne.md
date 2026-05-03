@@ -187,7 +187,7 @@ Kryteria funkcjonalne:
 
 Kryteria funkcjonalne:
 - System udostępnia listę sprzętu sportowego
-- System pozwala na wyszukiwanie sprzętu po nazwie
+- System pozwala na wyszukiwanie sprzętu po nazwie lub unikalnym identyfikatorze sprzętu
 - System umożliwia filtrowanie sprzętu według kategorii (np. sporty zimowe, wodne itd.)
 - System udostępnia następujące klasy kategorii i podkategorii:
   - tematyczne:
@@ -209,6 +209,7 @@ Kryteria funkcjonalne:
 - System umożliwia sortowanie sprzętu wg ceny wypożycznia na jeden dzień, liczby dni eksploatacji, popularności danego modelu sprzętu
 - Sytem umożliwia sortowanie wg wielu kryteriów jednocześnie, wg wybranej hierarchi priorytetowości poszczególnych kryteriów
 - System umożliwia rozpoczęcie procedury rejestracji wydania sprzętu z poziomu przeglądu szczegółów konkretnego sprzętu, pod warunkiem, że sprzęt jest dostępny
+- System udostępnia historię sprzętu z poziomu przeglądu szczegółów sprzętu
 
 ## Jako operator wypożyczeń chcę rozpatrywać wnioski klientów o przedłużenie wypożyczenia, aby równoważyć potrzeby klientów posiadających wypożyczony sprzęt oraz chcących wypożyczyć
 
@@ -225,4 +226,14 @@ Kryteria funkcjonalne:
 - System udostępnia przegląd sprzętów wypożyczonych w przeszłości i aktualnie przez klienta na zasadach filtracji i sortowania dostępnych w głównym przeglądzie sprzętu
 - System umożliwia filtrowanie sprzętów klienta na aktualnie wypożyczone i wypożyczone w przeszłości
 
-Jako operator wypożyczeń chciałbym mieć dostęp do historii danego sprzętu, aby móc prowadzić statystyki dotyczące wypożyczanego sprzętu oraz klientów
+## Jako operator wypożyczeń chciałbym mieć dostęp do historii danego sprzętu, aby móc prowadzić statystyki dotyczące wypożyczanego sprzętu oraz klientów
+Kryteria funkcjonalne:
+- System udostępnia przegląd okresów wypożyczeń sprzętu i okresów napraw
+- Okres wypożyczenia zawiera:
+  - datę początkową i końcową wypożyczenia,
+  - pierwotnie planowaną datę zwrotu i wszystkie planowane daty końcowe zaistniałe w wyniku przedłużeń
+  - dane klienta wypożyczającego sprzęt
+  - ewentualny komentarz dotyczący usterek
+  - koszt wypożyczenia (z uwzglęnieniem kosztu opoźnienia zwrotu oraz nie)
+  - koszt opoźnienia w zwrocie
+  - cenę wypożyczenia
