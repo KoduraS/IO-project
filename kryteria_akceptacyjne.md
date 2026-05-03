@@ -155,10 +155,77 @@ Kryteria pozafunkcjonalne:
 
 # Administrator
 
+## Jako administrator chcę definiować cenniki wypożyczeń, aby dostosować ofertę do rynku
+
+Kryteria funkcjonalne:
+- System udostępnia przegląd sprzętów z bazy danych na zasadach filtracji i sortowania dostępnych w głównym przeglądzie sprzętu
+- Istnieje możliwość dodania cennika sprzętu
+  - Istnieje możliwość dodania ceny za wyporzyczenie
+  - Istnieje możliwość dodania ceny za każdy dzień wypożyczenia
+- System udostępnia przegląd kategorii sprzętów
+- Istnieje możliwość dodania cennika dla kategorii
+  - Istnieje możliwość dodania ceny za wyporzyczenie
+  - Istnieje możliwość dodania ceny za każdy dzień wypożyczenia
+- Istnieje możliwość dodania domyślnego cennika
+  - Istnieje możliwość dodania ceny za wyporzyczenie
+  - Istnieje możliwość dodania ceny za każdy dzień wypożyczenia
+
+## Jako administrator chcę edytować bazę sprzętu, aby odwzorowywała rzeczywisty stan własnościowy wypożyczalni
+
+Kryteria funkcjonalne
+- System udostępnia przegląd sprzętów z bazy danych na zasadach filtracji i sortowania dostępnych w głównym przeglądzie sprzętu
+- System umożliwia zaznaczeie sprzętu i udostępnia opcję usuń
+  - Można wybrać ilość usuwanego sorzętu
+- System udostępnia opcję dodaj
+- Formularz dodawania zawiera obligatoryjne pola:
+  - nazwa
+  - kategoria
+  - ilość
+- Formulaż zawiera nieobligatoryjne pola:
+  - cena za wyporzyczenie
+  - cena za dzień wyporzyczenia
+- System zapisuje sprzęty w bazie danych po zatwierdzeniu przez administratora
+- System generuje unikalne identyfikatory dla dodanych sprętów
+- Jeżeli istnieje już sprzęt o danym identyfikatorze to do jego ilości dodawana jest nowa ilość
+- Jeżeli obligatoryjne pole nie zostało uzupełnione, w momencie zatwierdzenia formularza system go odrzuci i wskaże nieuzupełnione pola
+- Jeżeli pole zostało wypełnione niezgodnie z formatem (np. błędny zapis adresu email) system w momencie zatwierdzania odrzuci formularz i wskaże błędne dane
+
+## Jako administrator chcę edytować bazę pracowników, aby przyznawać odpowiednie uprawnienia personelowi w dostępie do systemu
+
+Kryteria funkcjonalne:
+- System udostępnia formularz rejestracji pracownika
+- Formularz rejestracji zawiera obligatoryjne pola:
+  - imię
+  - nazwisko
+  - numer kontaktowy na telefon służbowy
+  - unikalny identyfikator (PESEL/Nr innego dokumentu potwierdzającego tożsamość)
+  - poziom uprawnień
+- System zapisuje dane pracownika w bazie danych po zatwierdzeniu przez operatora wypożyczeń
+- Przy zapisie system generuje unikalny indentyfiaktor klienta w bazie danych
+- Jeżeli w bazie istnieje już pracownik o tym samym unikalnym identyfikatorze, system odrzuca zapis nowego prcownika do bazy i informuje operatora o występującym duplikacie
+- Jeżeli obligatoryjne pole nie zostało uzupełnione, w momencie zatwierdzenia formularza system go odrzuci i wskaże nieuzupełnione pola
+- Jeżeli pole zostało wypełnione niezgodnie z formatem (np. błędny zapis adresu email) system w momencie zatwierdzania odrzuci formularz i wskaże błędnie wypełnione pola
+- Jeżeli pola zostały wypełnione poprwnie to system generuje jednorazowe hasło dla pracownika i wsyła go w SMS
+
+## Jako administrator chcę zarządzać wysokością kar za opóźnienie w zwrocie sprzętu, aby egzekwować regulamin wypożyczalni.
+
+Kryteria funkcjonalne:
+- System udostępnia przegląd sprzętów z bazy danych na zasadach filtracji i sortowania dostępnych w głównym przeglądzie sprzętu
+- Istnieje możliwość dodania reguł dotyczących opóźnień w zwrocie sprzętu
+  - Istnieje możliwość dodania ceny za przekroczenie terminu zwrotu
+  - Istnieje możliwość dodania ceny za każdy dzień opóźnienia
+- System udostępnia przegląd kategorii sprzętów
+- Istnieje możliwość dodania ogólnych reguł dotyczących opóźnień w zwrocie sprzętu
+  - Istnieje możliwość dodania ceny za przekroczenie terminu zwrotu
+  - Istnieje możliwość dodania ceny za każdy dzień opóźnienia
+- Istnieje możliwość dodania domyślnych reguł dotyczących opóźnień w zwrocie sprzętu
+  - Istnieje możliwość dodania ceny za przekroczenie terminu zwrotu
+  - Istnieje możliwość dodania ceny za każdy dzień opóźnienia
+
 ## Jako administrator chcę blokować konta klientów naruszających regulamin, aby ograniczać ryzyko strat w przyszłości
 
 Kryteria funkcjonalne:
-- System wyświetla listę użytkowników
+- System udostępnia listę klientów z bazy danych
 - Istnieje możliwość filtrowania oraz wyszukiwania użytkowników po danych osobowych
 - Istnieje możliwość blokowania konta użytkownika, należy podać uzasadnienie oraz odnośnik do punktu regulaminu
 - Do zablokowanego użytkownika wysłany zostaje e-mail,
