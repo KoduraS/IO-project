@@ -1,18 +1,29 @@
-# Obsługa klienta za pośrednictwem aplikacji mobilnej lub strony internetowej
----
+# Klient
+
 ## Jako klient chcę móc się zarejestrować do systemu aby móc korzystać z usług wypożyczalni
 
 Kryteria funkcjonalne:
-- Strona rejestracji wyświetla pola do wprowadzenia danych osobowych: imienia, nazwiska, daty urodzenia, nr telefonu, adres e-mail, oraz podwójnego wprowadzenia hasła
+- System udostępnia formularz rejestracji klienta
+- Formularz rejestracji zawiera obligatoryjne pola:
+  - imię
+  - nazwisko
+  - unikalny identyfikator (PESEL/Nr innego dokumentu potwierdzającego tożsamość)
+  - numer kontaktowy
+  - adres do korespondencji pocztowej
+  - hasło oraz jego potwierdzenie
+- Formularz zawiera nieobligatoryjne pola:
+  - adres email
 - Pola akceptują tylko poprawne formaty danych, pola z hasłem są zakropkowane
 - System ocenia siłę hasła
 - System weryfikuje e-mail poprzez wysłanie na niego wiadomości z kodem weryfikacyjnym
+- Po zweryfikowaniu adresu e-mail system zapisuje dane klienta w bazie danych
+- Przy zapisie system generuje unikalny indentyfiaktor klienta w bazie danych
 - Po zweryfikowaniu adresu e-mail możliwe jest zalogowanie, użytkownik jest przekierowany na stronę logowania
-- Możliwa jest rejestracja przez popularne platformy, takie jak google
 
 Kryteria pozafunkcjonalne:
 - Dane użytkownika są szyfrowane
 - E-mail do użytkownika jest wysyłany w ciągu 3 s od kliknięcia "Załóż konto" (w 95% przypadków)
+- Zapis klienta do bazy danych odbywa się w ciągu co najwyżej 2 sekund (w 95% przypadków)
 
 ## Jako klient chcę móc się zalogować do systemu aby móc korzystać z usług wypożyczalni
 
@@ -20,11 +31,10 @@ Kryteria funkcjonalne:
 - Strona logowania wyświetla pola na e-mail oraz hasło
 - Pole e-mail akceptuje tylko poprawne formaty, a pole hasła jest zakropkowane
 - Strona logowania ma opcję "Zapominałem hasła", która wysyła do użytkownika e-mail z numerem weryfikacyjnym, po jego wprowadzeniu możliwe jest ponowne wybranie hasła
-- Możliwe jest zalogowanie przy użyciu popularnych platform, takich jak google
 - Po zalogowaniu użytkownik przekierowywany jest do punktu nawigacyjnego
 
 Kryteria pozafunkcjonalne:
-- e-mail i hasło są szyfrowane
+- E-mail i hasło są szyfrowane
 - E-mail do użytkownika jest wysyłany w ciągu 3 s od kliknięcia "Zapomniałem hasła" (w 95% przypadków)
 
 ## Jako klient chcę przeglądać listę wypożyczonego przeze mnie sprzętu wraz z informacją o terminie zwrotu, aby umiejętnie zagospodarować czas przeznaczony na wykorzystanie sprzętu
@@ -33,8 +43,26 @@ Kryteria funkcjonalne:
 - System wyświetla listę wypożyczonego sprzętu posortowaną według czasu pozostałego do terminu zwrotu
 - W przypadku przekroczenia terminu wyświetlana jest o tym informacja
 - Istnieje możliwość zmiany sortowania, np. alfabetyczne
-- Istnieje możliwość wyszukiwania sprzętu, np. nazwie, marce, dacie wypożyczenia, terminie zwrotu
-- System wyświetla dodatkowe informacje o sprzęcie (nazwa, marka, opis, data wypożyczenia, termin oddania)
+- System umożliwia filtrowanie sprzętu według według daty wypożyczenia oraz terminu zwrotu
+- System umożliwia filtrowanie sprzętu według kategorii (np. sporty zimowe, wodne itd.)
+- System udostępnia następujące klasy kategorii i podkategorii:
+  - tematyczne:
+    - sporty zimowe
+      - narciarstwo
+      - snowboarding
+      - ...
+    - sporty wodne
+      - kajakarstwo
+      - wędkowanie
+      - nurkowanie
+      - ...
+    - kolarstwo
+    - ...
+  - dostępność:
+    - dostępny
+    - wypożyczony
+    - w naprawie
+- System wyświetla dodatkowe informacje o sprzęcie (nazwa, marka, opis, data wypożyczenia, termin oddania, ...)
 - W przypadku przekroczenia terminu wyświetlana jest również informacjo o dodatkowej opłacie
 
 Kryteria pozafunkcjonalne:
@@ -45,6 +73,7 @@ Kryteria pozafunkcjonalne:
 
 Kryteria funkcjonalne:
 - System wyświetla listę wypożyczonych sprzętów i umożliwia zaznaczanie ich
+- System umożliwia filtrowanie, wyszukiwanie i sortowanie tak samo jak w przypadku listy wypożyczonego sprzętu
 - Po zaznaczeniu co najmniej jednego sprzętu i kliknięciu przycisku "Dalej" system umożliwia wybranie nowej daty zwrotu sprzętu
 - Po wybraniu nowej daty, jeżeli sprzęt nie jest zarezerwowany, system umożliwia naciśnięcie przycisku "Wyślij wniosek", w przeciwnym razie wyświetlany jest odpowiedni komunikat
 - Po kliknięciu "Wyślij wniosek" do operatora wypożyczeń wysyłany jest komunikat
@@ -72,12 +101,13 @@ Kryteria pozafunkcjonalne:
 
 Kryteria funkcjonalne:
 - System wyświetla listę dostępnego sprzętu
-- Istnieje możliwość filtrowania sprzętu po nazwie i marce
+- System umożliwia filtrowanie, wyszukiwanie i sortowanie tak samo jak w przypadku listy wypożyczonego sprzętu
+- Dodatkowo system umożliwia sortowanie sprzętu wg ceny wypożycznia na jeden dzień, liczby dni eksploatacji, popularności danego modelu sprzętu
 - System wyświetla dodatkowe informacje o sprzęcie (nazwa, marka, opis, ilość dostępnych sztuk)
-- Istnieje możliwość zaznaczenia sprzętu, jego ilości oraz wybrania "Zarezerwuj" lub "Wypożycz"
-- Istnieje możliwość wybrania daty odebrania i zdania sprzętu
+- Istnieje możliwość zaznaczenia sprzętu, jego ilości oraz wybrania "Zarezerwuj"
+- System udostępnia interfejs kalendarza pozwalający na wybranie okresu wypożyczenia
 - Jeżeli w tym czasie sprzęt nie jest zarezerwowany system udostępnia przycisk "Potwierdź", który przekierowuje do płatności
-- Po dokonaniu płatności do klienta wysyłany jest e-mail z potwierdzeniem a do operatora wypożyczeń komunikat z informacją o nowym zamówieniu
+- Po dokonaniu płatności do klienta wysyłany jest e-mail z potwierdzeniem, a do operatora wypożyczeń komunikat z informacją o nowym zamówieniu
 
 Kryteria pozafunkcjonalne:
 - System obsługuje do 1000 jednoczesnych wypożyczeń bez zmiany wydajności
@@ -92,8 +122,7 @@ Kryteria pozafunkcjonalne:
 
 Kryteria funkcjonalne:
 - System wyświetla listę zarezerwowanych sprzętów posortowana według czasu do odbioru
-- Istnieje możliwość zmiany sortowania, np. alfabetycznie
-- Istnieje możliwość wyszukiwania zarezerwowanego sprzęt po nazwie, marce, dacie odbioru i dacie zdania
+- System umożliwia filtrowanie, wyszukiwanie i sortowanie tak samo jak w przypadku listy wypożyczonego sprzętu
 - System wyświetla dodatkowe informacje o sprzęcie (nazwa, marka, opis, data odbioru, data zdania)
 - Istnieje możliwość anulowania rezerwacji, środki powracają na konto Rental-aid użytkownika, do operatora wysyłany jest komunikat
 
@@ -114,8 +143,7 @@ Kryteria funkcjonalne:
 
 Kryteria funkcjonalne:
 - System wyświetla listę dawnych wypożyczonych sprzętów posortowaną od najnowszego do najstarszego
-- Istnieje możliwość filtrowania sprzętów po nazwie, marce, dacie oddania, dacie odbioru
-- Istnieje możliwość zmiany sortowania, np. alfabetycznie
+- System umożliwia filtrowanie, wyszukiwanie i sortowanie tak samo jak w przypadku listy wypożyczonego sprzętu
 - System wyświetla nazwę, markę, opis, okres wypożyczenia sprzętu
 
 Kryteria pozafunkcjonalne:
@@ -124,6 +152,8 @@ Kryteria pozafunkcjonalne:
 <!--
 ## Jako klient chciałbym sprawdzić jakie jest moje opóźnienie w oddaniu sprzętu oraz jakie wiążą się z tym dodatkowe opłaty, aby znać całkowite koszty wynikające z wypożyczenia
 -->
+
+# Administrator
 
 ## Jako administrator chcę blokować konta klientów naruszających regulamin, aby ograniczać ryzyko strat w przyszłości
 
@@ -213,10 +243,10 @@ Kryteria funkcjonalne:
 
 ### Scenariusze testowe
 
-**Sortowanie wg ceny wypożyczenia**
-**Given:** Lista sprzętu jest otwarta
-**When:** Operator wybiera sortowanie malejąco wg ceny wypożyczenia
-**Then:** Sprzęty na liście wyświetlane są od góry do dołu w kolejności od najniższej ceny wypożyczenia do najwyższej
+**Sortowanie wg ceny wypożyczenia**<br>     <!--Tu entery tylko wstawiłem-->
+**Given:** Lista sprzętu jest otwarta<br>
+**When:** Operator wybiera sortowanie malejąco wg ceny wypożyczenia<br>
+**Then:** Sprzęty na liście wyświetlane są od góry do dołu w kolejności od najniższej ceny wypożyczenia do najwyższej<br>
 
 ## Jako operator wypożyczeń chcę rozpatrywać wnioski klientów o przedłużenie wypożyczenia, aby równoważyć potrzeby klientów posiadających wypożyczony sprzęt oraz chcących wypożyczyć
 
