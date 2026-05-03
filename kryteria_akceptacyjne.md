@@ -256,9 +256,25 @@ Kryteria funkcjonalne:
 - Wybrane zlecenie znika z listy zleceń i zmienia status na 'w realizacji'
 - System umożliwia potwierdzenie odbioru sprzętu od operatora wypożyczeń
 
-Jako magazynier chcę zgłaszać sprzęt do renowacji, aby utrzymać jego przydatność do użycia
-- System udostępnia formularz 
+Jako magazynier chcę zgłaszać sprzęt do naprawy, aby utrzymać jego przydatność do użycia
+Kryteria funkcjonalne
+- System udostępnia formularz naprawy
+- Formularz naprawy zawiera:
+  - pole na identyfikator sprzętu
+  - pole na komentarz dotyczący wymaganych napraw
+- Po zatwierdzeniu formularza system oznacza sprzęt statusem 'w naprawie'
+- System zapisuje czas utworzenia formularza
 
-Jako magazynier chcę zatwierdzać oddanie sprzętu do renowacji, aby uaktualnić stan magazynowy
-
-Jako magazynier chcę potwierdzić odebranie sprzętu po renowacji, aby uaktualnić stan magazynowy
+Jako magazynier chcę zatwierdzać oddanie sprzętu do naprawy, aby uaktualnić stan magazynowy
+Kryteria funkcjonalne:
+- System udostępnia listę zleceń wydania sprzętu do naprawy
+- System umożliwia magazynierowi wybranie zlecenia
+- Wybrane zlecenie znika z listy zleceń
+- System umożliwia potwierdzenie wydania sprzętu podmiotowi realizującemu naprawę
+  
+Jako magazynier chcę potwierdzić odebranie sprzętu po naprawie, aby uaktualnić stan magazynowy
+Kryteria funkcjonalne:
+- System udostępnia listę zleceń odbioru sprzętu z naprawy
+- System umożliwia magazynierowi wybranie zlecenia
+- Wybrane zlecenie znika z listy zleceń
+- System umożliwia potwierdzenie odbioru sprzętu od podmiotu realizującego naprawę
