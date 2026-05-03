@@ -239,3 +239,26 @@ Kryteria funkcjonalne:
   - koszt opoźnienia w zwrocie
   - cenę wypożyczenia na jeden dzień
   - koszt opóźnienia w zwrocie o jeden dzień
+
+# Magazynier
+---
+## Jako magazynier chcę potwierdzić wydanie sprzętu operatorowi wypożyczeń, aby uaktualnić stan magazynowy
+Kryteria funkcjonalne:
+- System udostępnia listę zleceń wydania sprzętu
+- System umożliwia magazynierowi wybranie zlecenia
+- Wybrane zlecenie znika z listy zleceń i zmienia status na 'w realizacji'
+- System umożliwia potwierdzenie wydania sprzętu operatorowi wypożyczeń
+
+## Jako magazynier chcę potwierdzić odbiór sprzętu od operatora wypożyczeń, aby uaktualnić stan magazynowy
+Kryteria funkcjonalne:
+- System udostępnia listę zleceń odbioru sprzętu
+- System umożliwia magazynierowi wybranie zlecenia
+- Wybrane zlecenie znika z listy zleceń i zmienia status na 'w realizacji'
+- System umożliwia potwierdzenie odbioru sprzętu od operatora wypożyczeń
+
+Jako magazynier chcę zgłaszać sprzęt do renowacji, aby utrzymać jego przydatność do użycia
+- System udostępnia formularz 
+
+Jako magazynier chcę zatwierdzać oddanie sprzętu do renowacji, aby uaktualnić stan magazynowy
+
+Jako magazynier chcę potwierdzić odebranie sprzętu po renowacji, aby uaktualnić stan magazynowy
