@@ -146,23 +146,36 @@ Kryteria funkcjonalne:
 - Formularz rejestracji zawiera obligatoryjne pola:
   - imię
   - nazwisko
+  - unikalny identyfikator (PESEL/Nr innego dokumentu potwierdzającego tożsamość)
   - numer kontaktowy
   - adres do korespondencji pocztowej
 - Formularz zawiera nieobligatoryjne pola:
   - adres email
-
-- System wyświetla listę użytkowników
-- Istnieje możliwość filtrowania oraz wyszukiwania użytkowników po danych osobowych
-- Istnieje możliwość blokowania konta użytkownika, należy podać uzasadnienie oraz odnośnik do punktu regulaminu
-- Do zablokowanego użytkownika wysłany zostaje e-mail,
-- W aplikacji oraz podczas próby zalogowania na stronie internetowej wyświetlany jest odpowiedni komunikat
+- System zapisuje dane klienta w bazie danych po zatwierdzeniu przez operatora wypożyczeń
+- Jeżeli w bazie istnieje już klient o tym samym unikalnym identyfikatorze, system odrzuca zapis nowego klienta do bazy i informuje operatora o występującym duplikacie
+- Jeżeli obligatoryjne pole nie zostało uzupełnione, w momencie zatwierdzenia formularza system go odrzuci i wskaże nieuzupełnione pola
+- Jeżeli pole zostało wypełnione niezgodnie z formatem (np. błędny zapis adresu email) system w momencie zatwierdzania odrzuci formularz i wskaże błędnie wypełnione pola
 
 Kryteria pozafunkcjonalne:
-- E-mail do użytkownika zostaje wysłany w ciągu 10 s od zablokowania konta (w 95% przypadków)
+- Zapis klienta do bazy danych odbywa się w ciągu co najwyżej 2 sekund (w 95% przypadków)
 
-Jako operator wypożyczeń chcę zarejestrować wydanie sprzętu klientowi, aby utrzymywać aktualny stan magazynowy i egzekwować zwrot wypożyczonego sprzętu 
+## Jako operator wypożyczeń chcę zarejestrować wydanie sprzętu klientowi, aby utrzymywać aktualny stan magazynowy i egzekwować zwrot wypożyczonego sprzętu 
 
-Jako operator wypożyczeń chcę zarejestrować zwrot sprzętu przez klienta, aby uregulować ewentualne należności z tytułu uszkodzeń sprzętu lub opóźnionego zwrotu oraz uaktualnić stan magazynowy
+Kryteria funkcjonalne:
+- System udostępnia listę klientów obecnych w bazie danych
+- System umożliwia dodanie klienta z listy klientów
+- System udostępnia skrót do dodania nowego klienta, który automatycznie zostanie podpięty pod aktualnie rejestrowane wydanie sprzętu
+- System udostępnia interfejs kalendarza pozwalający na wybranie okresu wypożyczenia
+- System udostępnia listę dostępnego sprzętu sportowego
+- System pozwala na wyszukiwanie sprzętu po nazwie
+- System umożliwia filtrowanie sprzętu według kategorii (np. sporty zimowe, wodne itd.)
+- System umożliwia sortowanie sprzętu wg ceny wypożycznia na jeden dzień, liczby dni eksploatacji, popularności danego modelu sprzętu
+- Sytem umożliwia sortowanie wg wielu kryteriów jednocześnie, wg wybranej hierarchi priorytetowości poszczególnych kryteriów
+
+## Jako operator wypożyczeń chcę zarejestrować zwrot sprzętu przez klienta, aby uregulować ewentualne należności z tytułu uszkodzeń sprzętu lub opóźnionego zwrotu oraz uaktualnić stan magazynowy
+
+Kryteria funkcjonalne:
+
 
 Jako operator wypożyczeń chcę przeglądać dostępne w magazynie wyposażenie do wypożyczenia, aby udzielić klientowi pełnej informacji
 
