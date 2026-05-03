@@ -136,3 +136,42 @@ Kryteria funkcjonalne:
 
 Kryteria pozafunkcjonalne:
 - E-mail do użytkownika zostaje wysłany w ciągu 10 s od zablokowania konta (w 95% przypadków)
+
+# Operator wypożyczeń
+
+## Jako operator wypożyczeń chcę zarejestrować klienta w bazie klientów, aby móc powiązać go z wypożyczeniem sprzętu
+
+Kryteria funkcjonalne:
+- System udostępnia formularz rejestracji klienta
+- Formularz rejestracji zawiera obligatoryjne pola:
+  - imię
+  - nazwisko
+  - numer kontaktowy
+  - adres do korespondencji pocztowej
+- Formularz zawiera nieobligatoryjne pola:
+  - adres email
+
+- System wyświetla listę użytkowników
+- Istnieje możliwość filtrowania oraz wyszukiwania użytkowników po danych osobowych
+- Istnieje możliwość blokowania konta użytkownika, należy podać uzasadnienie oraz odnośnik do punktu regulaminu
+- Do zablokowanego użytkownika wysłany zostaje e-mail,
+- W aplikacji oraz podczas próby zalogowania na stronie internetowej wyświetlany jest odpowiedni komunikat
+
+Kryteria pozafunkcjonalne:
+- E-mail do użytkownika zostaje wysłany w ciągu 10 s od zablokowania konta (w 95% przypadków)
+
+Jako operator wypożyczeń chcę zarejestrować wydanie sprzętu klientowi, aby utrzymywać aktualny stan magazynowy i egzekwować zwrot wypożyczonego sprzętu 
+
+Jako operator wypożyczeń chcę zarejestrować zwrot sprzętu przez klienta, aby uregulować ewentualne należności z tytułu uszkodzeń sprzętu lub opóźnionego zwrotu oraz uaktualnić stan magazynowy
+
+Jako operator wypożyczeń chcę przeglądać dostępne w magazynie wyposażenie do wypożyczenia, aby udzielić klientowi pełnej informacji
+
+Jako operator wypożyczeń chcę przeglądać listę sprzętu wypożyczonego, aby udzielić pełnej informacji klientowi
+
+Jako operator wypożyczeń chcę rozpatrywać wnioski klientów o przedłużenie wypożyczenia, aby równoważyć potrzeby klientów posiadających wypożyczony sprzęt oraz chcących wypożyczyć
+
+Jako operator wypożyczeń chcę odnotowywać zaistniałe usterki powstałe w wyniku eksploatacji sprzętu przez klienta, aby prowadzić dokumentację stanu sprzętu i mieć podstawy do pokrycia kosztów naprawy przez klienta
+
+Jako operator wypożyczeń chciałbym mieć dostęp do historii wypożyczonych sprzętów klienta, aby móc lepiej doradzić klientowi w wyborze sprzętu
+
+Jako operator wypożyczeń chciałbym mieć dostęp do historii danego sprzętu, aby móc prowadzić statystyki dotyczące wypożyczanego sprzętu oraz klientów
