@@ -310,10 +310,13 @@ Kryteria funkcjonalne:
 
 ### Scenariusze testowe
 
-**Sortowanie wg ceny wypożyczenia**<br>     <!--Tu entery tylko wstawiłem-->
-**Given:** Lista sprzętu jest otwarta<br>
-**When:** Operator wybiera sortowanie malejąco wg ceny wypożyczenia<br>
-**Then:** Sprzęty na liście wyświetlane są od góry do dołu w kolejności od najniższej ceny wypożyczenia do najwyższej<br>
+**Sortowanie wg ceny wypożyczenia**
+
+**Given:** Lista sprzętu jest otwarta
+
+**When:** Operator wybiera sortowanie malejąco wg ceny wypożyczenia
+
+**Then:** Sprzęty na liście wyświetlane są od góry do dołu w kolejności od najniższej ceny wypożyczenia do najwyższej
 
 ## Jako operator wypożyczeń chcę rozpatrywać wnioski klientów o przedłużenie wypożyczenia, aby równoważyć potrzeby klientów posiadających wypożyczony sprzęt oraz chcących wypożyczyć
 
@@ -334,7 +337,8 @@ Kryteria funkcjonalne:
 ## Jako operator wypożyczeń chciałbym mieć dostęp do historii danego sprzętu, aby móc prowadzić statystyki dotyczące wypożyczanego sprzętu oraz klientów
 Kryteria funkcjonalne:
 - System udostępnia przegląd okresów wypożyczeń sprzętu i okresów napraw
-- Okres wypożyczenia zawiera:
+- System umożliwia przegladanie szczegółów poszczególnych okresów
+- Szczegółowy opis okres wypożyczenia zawiera:
   - datę początkową i końcową wypożyczenia,
   - pierwotnie planowaną datę zwrotu i wszystkie planowane daty końcowe zaistniałe w wyniku przedłużeń
   - dane klienta wypożyczającego sprzęt
@@ -343,6 +347,8 @@ Kryteria funkcjonalne:
   - koszt opoźnienia w zwrocie
   - cenę wypożyczenia na jeden dzień
   - koszt opóźnienia w zwrocie o jeden dzień
+
+
 
 # Magazynier
 ---
