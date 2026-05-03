@@ -211,6 +211,13 @@ Kryteria funkcjonalne:
 - System umożliwia rozpoczęcie procedury rejestracji wydania sprzętu z poziomu przeglądu szczegółów konkretnego sprzętu, pod warunkiem, że sprzęt jest dostępny
 - System udostępnia historię sprzętu z poziomu przeglądu szczegółów sprzętu
 
+### Scenariusze testowe
+
+**Sortowanie wg ceny wypożyczenia**
+**Given:** Lista sprzętu jest otwarta
+**When:** Operator wybiera sortowanie malejąco wg ceny wypożyczenia
+**Then:** Sprzęty na liście wyświetlane są od góry do dołu w kolejności od najniższej ceny wypożyczenia do najwyższej
+
 ## Jako operator wypożyczeń chcę rozpatrywać wnioski klientów o przedłużenie wypożyczenia, aby równoważyć potrzeby klientów posiadających wypożyczony sprzęt oraz chcących wypożyczyć
 
 Kryteria funkcjonalne:
