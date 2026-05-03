@@ -223,6 +223,7 @@ Kryteria funkcjonalne:
 ## Jako operator wypożyczeń chciałbym mieć dostęp do historii wypożyczonych sprzętów klienta, aby móc lepiej doradzić klientowi w wyborze sprzętu
 
 Kryteria funkcjonalne:
+- System udostępnia listę klientów z bazy danych
 - System udostępnia przegląd sprzętów wypożyczonych w przeszłości i aktualnie przez klienta na zasadach filtracji i sortowania dostępnych w głównym przeglądzie sprzętu
 - System umożliwia filtrowanie sprzętów klienta na aktualnie wypożyczone i wypożyczone w przeszłości
 
@@ -236,4 +237,5 @@ Kryteria funkcjonalne:
   - ewentualny komentarz dotyczący usterek
   - koszt wypożyczenia (z uwzglęnieniem kosztu opoźnienia zwrotu oraz nie)
   - koszt opoźnienia w zwrocie
-  - cenę wypożyczenia
+  - cenę wypożyczenia na jeden dzień
+  - koszt opóźnienia w zwrocie o jeden dzień
