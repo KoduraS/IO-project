@@ -531,13 +531,13 @@ Kryteria funkcjonalne:
 
 # Magazynier
 ---
-## Jako magazynier chcę potwierdzić wydanie sprzętu operatorowi wypożyczeń, aby uaktualnić stan magazynowy
+## Jako magazynier chcę móc wykonać zlecenie wydania sprzętu operatorowi wypożyczeń, aby zapewnić sprawną obsługę klientów
 Kryteria funkcjonalne:
 - System udostępnia listę zleceń wydania sprzętu
 - System umożliwia magazynierowi wybranie zlecenia
 - Wybrane zlecenie znika z listy zleceń i zmienia status na 'w realizacji'
 - System umożliwia potwierdzenie wydania sprzętu operatorowi wypożyczeń
-- W wyniku potwierdzenia wydania sprzęt zmienia status z 'dostępny' na 'wypożyczony'
+- W wyniku potwierdzenia wydania sprzęt zmienia status z 'w drodze do operatora' na 'czeka na wydanie klientowi'
 
 ### Scenariusze testowe
 
@@ -547,15 +547,17 @@ Kryteria funkcjonalne:
 
 **When:** Magazynier zatwierdził wydanie sprzętu
 
-**Then:** Sprzęt zmienia status z 'dostępny' na 'wypożyczony'
+**Then:** Sprzęt zmienia status z 'w drodze do operatora' na 'czeka na wydanie klientowi'
 
-## Jako magazynier chcę potwierdzić odbiór sprzętu od operatora wypożyczeń, aby uaktualnić stan magazynowy
+## Jako magazynier chcę móc wykonać zlecenie odbioru sprzętu od operatora wypożyczeń i jego odstawienie do magazynu, aby zapewnić sprawną obsługę klientów
 Kryteria funkcjonalne:
 - System udostępnia listę zleceń odbioru sprzętu
 - System umożliwia magazynierowi wybranie zlecenia
 - Wybrane zlecenie znika z listy zleceń i zmienia status na 'w realizacji'
+- Sprzęty objęte zleceniem po jego przyjęciu przez magazyniera zmieniają status z 'zlecony do odbioru' na 'czeka na wydanie magazynierowi'
 - System umożliwia potwierdzenie odbioru sprzętu od operatora wypożyczeń
-- W wyniku potwierdzenia odbioru sprzęt zmienia status z 'wypożyczony' na 'dostępny'
+- W wyniku potwierdzenia odbioru sprzęt zmienia status z 'czeka na wydanie magazynierowi' na 'w drodze do magazynu'
+- W wyniku potwierdzenia zwrotu sprzętu do magazynu sprzęt zmienia status z 'w drodze do magazynu' na dostępny'
 
 ### Scenariusze testowe
 
@@ -565,7 +567,17 @@ Kryteria funkcjonalne:
 
 **When:** Magazynier zatwierdził odbiór sprzętu
 
-**Then:** Sprzęt zmienia status z 'wypożyczony' na 'dostępny'
+**Then:** Sprzęt zmienia status z 'czeka na wydanie magazynierowi' na 'w drodze do magazynu'
+
+---
+
+**Potwierdzenie odstawienia sprzętu do magazynu**
+
+**Given:** Magazynier potwierdził odebranie sprzętu od operatora wypożyczeń
+
+**When:** Magazynier zatwierdził odstawienie sprzętu do magazynu
+
+**Then:** Sprzęt zmienia status z 'w drodze do magazynu' na 'dostępny'
 
 ## Jako magazynier chcę zgłaszać sprzęt do naprawy, aby utrzymać jego przydatność do użycia
 Kryteria funkcjonalne
@@ -603,7 +615,7 @@ Kryteria funkcjonalne
 **Then:** Podświetlone zostaje pole komentarza ze wskazaniem, że to pole nie może być puste
 
 
-## Jako magazynier chcę zatwierdzać oddanie sprzętu do naprawy, aby uaktualnić stan magazynowy
+## Jako magazynier chcę móc wykonać zlecenie oddania sprzętu do naprawy, aby pomóc zachować sprawność sprzętu
 Kryteria funkcjonalne:
 - System udostępnia listę zleceń wydania sprzętu do naprawy
 - System umożliwia magazynierowi wybranie zlecenia
@@ -621,7 +633,7 @@ Kryteria funkcjonalne:
 
 **Then:** Sprzęt zmienia status z 'do naprawy' na 'w naprawie'
   
-## Jako magazynier chcę potwierdzić odebranie sprzętu po naprawie, aby uaktualnić stan magazynowy
+## Jako magazynier chcę móc wykonać zlecenie przyjęcia sprzętu z naprawy, aby zapewnić sprawną obsługę podmiotu naprawiającego
 Kryteria funkcjonalne:
 - System udostępnia listę zleceń odbioru sprzętu z naprawy
 - System umożliwia magazynierowi wybranie zlecenia
