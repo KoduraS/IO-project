@@ -250,7 +250,6 @@ Kryteria funkcjonalne:
   - adres email
 - System zapisuje dane klienta w bazie danych po zatwierdzeniu przez operatora wypożyczeń
 - Przy zapisie system generuje unikalny indentyfiaktor klienta w bazie danych
-- System automatycznie zapisuej aktualną datę i godzinę jako czas wydania sprzętu
 - Jeżeli w bazie istnieje już klient o tym samym unikalnym identyfikatorze, system odrzuca zapis nowego klienta do bazy i informuje operatora o występującym duplikacie
 - Jeżeli obligatoryjne pole nie zostało uzupełnione, w momencie zatwierdzenia formularza system go odrzuci i wskaże nieuzupełnione pola
 - Jeżeli pole zostało wypełnione niezgodnie z formatem (np. błędny zapis adresu email) system w momencie zatwierdzania odrzuci formularz i wskaże błędnie wypełnione pola
@@ -258,26 +257,107 @@ Kryteria funkcjonalne:
 Kryteria pozafunkcjonalne:
 - Zapis klienta do bazy danych odbywa się w ciągu co najwyżej 2 sekund (w 95% przypadków)
 
+### Scenariusze testowe
+
+**Zatwierdzenie poprawnego formularza**
+
+**Given:** Formularz jest poprawnie wypełniony
+
+**When:** Operator zatwierdza formularz
+
+**Then:** System generuje unikalny identyfikator klienta i zapisuje go w bazie danych
+
+---
+
+**Brakujące pole obligatoryjne**
+
+**Given:** Formularz zawiera niewypełnione pole obligatoryjne
+
+**When:** Operator zatwierdza formularz
+
+**Then:** System odrzuca formularz i podświetla brakujące pole
+
+---
+
+**Niepoprawnie wypełnione pole**
+
+**Given:** Formularz zawiera pole wypełnione niezgodnie z formatem
+
+**When:** Operator zatwierdza formularz
+
+**Then:** System odrzuca formularz i podświetla błędnie wypełnione pole, wystosowując komunikat dotyczący prawidłowego formatu
+
+---
+
+**Klient już istnieje w systemie**
+
+**Given:** Nr dokumentu/PESEL klienta pokrywa się ze wpisem już istniejącym w bazie klientów
+
+**When:** Operator zatwierdza formularz
+
+**Then:** System odrzuca formularz i wskazuje na istnienie klienta w bazie
+
 ## Jako operator wypożyczeń chcę zarejestrować wydanie sprzętu klientowi, aby utrzymywać aktualny stan magazynowy i egzekwować zwrot wypożyczonego sprzętu 
 
 Kryteria funkcjonalne:
 - System udostępnia listę klientów obecnych w bazie danych
 - System umożliwia dodanie klienta z listy klientów
 - System udostępnia skrót do dodania nowego klienta, który automatycznie zostanie podpięty pod aktualnie rejestrowane wydanie sprzętu
-- System udostępnia interfejs kalendarza pozwalający na wybranie okresu wypożyczenia
+- System umożliwia dodanie wyposażenia z przeglądu sprzętu do listy wszystkich wypożyczanych sprzętów w ramach danego formularza wydania
+- Przegląd sprzętu jest ograniczony do sprzętów o statusie 'dostępny'
+- System udostępnia możliwość wybrania okresu wypożyczenia dla każdej pozycji z listy wypożyczanych sprzętów
+- Po wybraniu daty końcowej system oblicza i wyświetla liczbę dni do zwrotu liczoną od dnia wydania sprzętu
 - System umożliwia wybranie sprzętu z przeglądu wyposażenia zawężonego do sprzętów dostępnych
-- System udostępnia mechanizm powiadamiania magazyniera o konieczności wydania sprzętu z magazynu na stanowisko operatora wypożyczeń, wyzwalany w momencie potwierdzenia wyboru sprzętu w formularzu wydania
+- System udostępnia mechanizm powiadamiania magazynierów o konieczności wydania sprzętu z magazynu na stanowisko operatora wypożyczeń, wyzwalany w momencie potwierdzenia wyboru sprzętu w formularzu wydania
 - System umożliwia zatwierdzenie wydania sprzętu
 
 ### Scenariusze testowe
 
-**Sortowanie wg ceny wypożyczenia**
+**Dodanie klienta**
 
-**Given:** Lista sprzętu jest otwarta
+**Given:** Formularz wydania sprzętu jest otwarty
 
-**When:** Operator wybiera sortowanie malejąco wg ceny wypożyczenia
+**When:** Operator wybiera klienta z listy
 
-**Then:** Sprzęty na liście wyświetlane są od góry do dołu w kolejności od najniższej ceny wypożyczenia do najwyższej
+**Then:** Klient jest dodawany do formularza
+
+---
+
+**Given:** Formularz wydania sprzętu jest otwarty
+
+**When:** Operator dodaje nowego klienta do bazy klientów
+
+**Then:** Klient jest dodawany do formularza
+
+---
+
+**Wybranie okresu wypożyczenia**
+
+**Given:** Formularz wydania sprzętu jest otwarty
+
+**When:** Operator wybiera datę końcową wypożyczenia
+
+**Then:** W polu data końcowa widnieje wybrana data
+
+---
+
+**Zatwierdzenie wyboru sprzętów**
+
+**Given:** Formularz wydania sprzętu jest poprawnie wypełniony
+
+**When:** Operator zatwierdza wybór sprzętów
+
+**Then:** System zapisuje formularz i generuje zlecenie wydania sprzętu dla magazynierów, ustawiając status sprzętu na 'zlecony do wydania operatorowi'
+
+---
+
+**Zatwierdzenie wydania sprzętu**
+
+**Given:** Formularz wydania sprzętu jest poprawnie wypełniony
+
+**When:** Operator zatwierdza wydanie sprzętu
+
+**Then:** System zapisuje formularz i zmienia status wypożyczonych sprzętów z 'czeka na wydanie klientowi' na 'wypożyczony'
 
 ## Jako operator wypożyczeń chcę zarejestrować zwrot sprzętu przez klienta, aby uregulować ewentualne należności z tytułu uszkodzeń sprzętu lub opóźnionego zwrotu oraz uaktualnić stan magazynowy
 
@@ -380,6 +460,16 @@ Kryteria funkcjonalne:
 **When:** Operator wyszukuje po frazie 'kajak'
 
 **Then:** Na liście wyświetlane są tylko sprzęty zawierające w nazwie frazę 'kajak'
+
+---
+
+**Wyszukiwanie po identyfikatorze**
+
+**Given:** Lista sprzętu jest otwarta
+
+**When:** Operator wpisuje cały lub fragment indentyfikatora
+
+**Then:** Na liście wyświetlane są tylko sprzęty, dla których wpisany ciąg znaków stanowi początkowy fragment identyfikatora
 
 ## Jako operator wypożyczeń chcę rozpatrywać wnioski klientów o przedłużenie wypożyczenia, aby równoważyć potrzeby klientów posiadających wypożyczony sprzęt oraz chcących wypożyczyć
 
