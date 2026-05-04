@@ -8,13 +8,12 @@ Kryteria funkcjonalne:
   - imię
   - nazwisko
   - unikalny identyfikator (PESEL/Nr innego dokumentu potwierdzającego tożsamość)
-  - numer kontaktowy
-  - adres do korespondencji pocztowej
+  - adres email
   - hasło oraz jego potwierdzenie
 - Formularz zawiera nieobligatoryjne pola:
-  - adres email
+  - numer kontaktowy
+  - adres do korespondencji pocztowej
 - Pola akceptują tylko poprawne formaty danych, pola z hasłem są zakropkowane
-- System ocenia siłę hasła
 - System weryfikuje e-mail poprzez wysłanie na niego wiadomości z kodem weryfikacyjnym
 - Po zweryfikowaniu adresu e-mail system zapisuje dane klienta w bazie danych
 - Przy zapisie system generuje unikalny indentyfiaktor klienta w bazie danych
@@ -303,13 +302,13 @@ Kryteria pozafunkcjonalne:
 
 **Then** Wyporzyczenie pozostaje nieopłacone, system wyświetla informację o braku odpowiednich środków na koncie
 
-## Jako klient chcę przeglądać dostępne w magazynie wyposażenie do wypożyczenia, aby móc w wyprzedzeniem określić swoje zamiary w kwestii wypożyczenia lub zarezerwować sprzęt lub wypożyczyć (z wydaniem sprzętu w punkcie stacjonarnym) 
+## Jako klient chcę przeglądać dostępne w magazynie wyposażenie do wypożyczenia, aby móc w wyprzedzeniem określić swoje zamiary w kwestii wypożyczenia lub zarezerwować sprzęt <!--lub wypożyczyć--> (z wydaniem sprzętu w punkcie stacjonarnym) 
 <!-- Jaka jest różnica miedzy wypożyczeniem a rezerwowaniem? -->
 
 Kryteria funkcjonalne:
 - System wyświetla listę dostępnego sprzętu
 - System umożliwia filtrowanie, wyszukiwanie i sortowanie tak samo jak w przypadku listy wypożyczonego sprzętu
-- Dodatkowo system umożliwia sortowanie sprzętu wg ceny wypożycznia na jeden dzień, liczby dni eksploatacji, popularności danego modelu sprzętu
+- Dodatkowo system umożliwia sortowanie sprzętu wg ceny wypożycznia na jeden dzień, popularności danego modelu sprzętu
 - System wyświetla dodatkowe informacje o sprzęcie (nazwa, marka, opis, ilość dostępnych sztuk)
 - Istnieje możliwość zaznaczenia sprzętu, jego ilości oraz wybrania "Zarezerwuj"
 - System udostępnia interfejs kalendarza pozwalający na wybranie okresu wypożyczenia
