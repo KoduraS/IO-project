@@ -25,6 +25,59 @@ Kryteria pozafunkcjonalne:
 - E-mail do użytkownika jest wysyłany w ciągu 3 s od kliknięcia "Załóż konto" (w 95% przypadków)
 - Zapis klienta do bazy danych odbywa się w ciągu co najwyżej 2 sekund (w 95% przypadków)
 
+### Scenariusze testowe
+**Poprawna rejestrcja**
+
+**Given:** Urzytkownik nie posiada konta
+
+**And:** Urzytkownik wprowadził dane zgodnie z formatami
+
+**And:** Urzytkownik wprowadził hasło oraz je potwierdziła
+
+**When:** Urzytkownik naciska przycisk zweryfikuj e-mail
+
+**Then:** System wysyła e-mail weryfikujący na adres użytkownika, a urzytkownik jest przekierowany na stronę z kodem
+
+**Weryfikacja e-mail**
+
+**Given:** Urzytkownik otrzymał e-mail weryfikacyjny
+
+**When:** Urzytkownik wprowadza kod na stronie z weryfikacją
+
+**Then:** Konto urzytkownika zostaje zapisane w bazie, a urzytkownik zostaje przekierowany na stronę z logowaniem
+
+**Rejestracja z niepypełnionymi polami**
+
+**Given:** Urzytkownik wprowadził nie wprowadził jakichś obligarotyjnych danych
+
+**When:** Urzytkownik naciska przycisk zweryfikuj e-mail
+
+**Then:** System zaznacza obligatoryjne pola i wyświetla kimunikat o tym, że aby kontynuować należy je wypelnić
+
+**Rejestracja z różnymi hasami**
+
+**Given:** Urzytkownik wprowadził dane zgodnie z formatami
+
+**And:** Urzytkownik wprowadził dwa różne hasła
+
+**When:** Urzytkownik naciska przycisk zweryfikuj e-mail
+
+**Then:** System informuje użytkownika o tym, że hasła są różne
+
+**Rejestracja mimo posidania konta**
+
+**Given:** Urzytkownik posiada już konto na dany e-mail
+
+**And:** Urzytkownik wprowadził dane zgodnie z formatami
+
+**And:** Urzytkownik wprowadził hasło oraz je potwierdziła
+
+**When:** Urzytkownik naciska przycisk zweryfikuj e-mail
+
+**Then:** System wyświetla komunikat o tym, że konto na dany e-mail już istnieje i przekierowuje na stronę logowania
+
+
+
 ## Jako klient chcę móc się zalogować do systemu aby móc korzystać z usług wypożyczalni
 
 Kryteria funkcjonalne: 
@@ -32,10 +85,57 @@ Kryteria funkcjonalne:
 - Pole e-mail akceptuje tylko poprawne formaty, a pole hasła jest zakropkowane
 - Strona logowania ma opcję "Zapominałem hasła", która wysyła do użytkownika e-mail z numerem weryfikacyjnym, po jego wprowadzeniu możliwe jest ponowne wybranie hasła
 - Po zalogowaniu użytkownik przekierowywany jest do punktu nawigacyjnego
+- Po 5 nieprawidłowych próbach logowania urzytkownik musi odczekać 5 min przed koleją próbą logowania (przed każdą następną też)
 
 Kryteria pozafunkcjonalne:
 - E-mail i hasło są szyfrowane
 - E-mail do użytkownika jest wysyłany w ciągu 3 s od kliknięcia "Zapomniałem hasła" (w 95% przypadków)
+
+### Scenariusze testowe
+
+**Poprawne logowanie**
+
+**Given** Urzytkownik wprowadził istniejący e-mail oraz poprawne hasło
+
+**When** Urzytkownik naciska przycisk zaloguj
+
+**Then** Urzytkownik zostaje zalogowany i przekierowany do punktu nawigacyjnego
+
+**Próba logogowania z nieprawidłowym hasłem (próby < 5)**
+
+**Given** Urzytkownik wprowadził istniejący e-mail oraz niepoprawne hasło
+
+**And:** Liczba prób wprowadzenia hasła wynosi mniej niż 5
+
+**When** Urzytkownik naciska przycisk zaloguj
+
+**Then** Urzytkownik zostaje powiadomiony, że hasło jest nieprawidłowe
+
+**Próba logogowania z nieprawidłowym hasłem (próby > 5)**
+
+**Given** Urzytkownik wprowadził istniejący e-mail oraz niepoprawne hasło
+
+**And:** Liczba prób wprowadzenia hasła wynosi więcej niż 5
+
+**When** Urzytkownik naciska przycisk zaloguj
+
+**Then** Urzytkownik zostaje powiadomiony, że hasło jest nieprawidłowe, oraz że przekroczył dopuszczalną ilość prób i musi odczekać 5 min
+
+**Próba logogowania z nieistniejącym e-mailem**
+
+**Given** Urzytkownik wprowadził nieistniejący e-mail oraz hasło
+
+**When** Urzytkownik naciska przycisk zaloguj
+
+**Then** Urzytkownik zostaje powiadomiony, że dany login nie istnieje
+
+**Próba logogowania z nieistniejącym e-mailem**
+
+**Given** Urzytkownik wprowadził nieistniejący e-mail oraz hasło
+
+**When** Urzytkownik naciska przycisk zaloguj
+
+**Then** Urzytkownik zostaje powiadomiony, że nie ma konta na taki e-mail i sugeruje rejestrację
 
 ## Jako klient chcę przeglądać listę wypożyczonego przeze mnie sprzętu wraz z informacją o terminie zwrotu, aby umiejętnie zagospodarować czas przeznaczony na wykorzystanie sprzętu
 
@@ -69,6 +169,40 @@ Kryteria pozafunkcjonalne:
 - Opcja przeglądania sprzętu jest dostępna 24/7, czas niedostępności nie przekracza łącznie 1 dnia miesięcznie
 - Po wydaniu albo zdaniu sprzętu lista wypożyczonego sprzętu jest aktualizowana w ciągu 10 s od wprowadzenia informacji do systemu (w 95% przypadków)
 
+### Scenariusze testowe
+
+**Sortowanie według wybranych kryteriów**
+
+**Given:** Lista wyporzyczonych sprzętów jest otwarta
+
+**When:** Urzytkowenik wybiera sortowanie, np. wedlug daty wypożyczenia malejąco
+
+**Then:** System wyświetla wypożyczone sprzęty w wybranej kolejności
+
+**Filtrowanie według wybranych krytriów**
+
+**Given:** Lista wyporzyczonych sprzętów jest otwarta
+
+**When:** Urzytkowenik wybiera filtrowanie sprzętów do sportów wodnych 
+
+**Then:** System wyświetla sprzęty pasujące do kryteriów
+
+**Wyszukiwanie**
+
+**Given:** Lista wyporzyczonych sprzętów jest otwarta
+
+**When:** Urzytkowenik wyszukuje frazę kajak 
+
+**Then:** System wyświetla sprzęty w których nazwie znaleziono "kajak"
+
+**Sprawdzanie dodatkowych informacji o sprzęcie**
+
+**Given:** Lista wyporzyczonych sprzętów jest otwarta
+
+**When:** Urzytkowenik wybiera sprzęt z listy 
+
+**Then:** System wyświetla dodatkowe informacje o sprzęcie (nazwa, marka, opis, data wyporzyczenia, termin oddania, ew. opłata wynikajaca z przekroczenia terminu)
+
 ## Jako klient chcę wnioskować o przedłużenie wypożyczenia, aby móc elastycznie dostosowywać jego czas do zachodzących potrzeb oraz okazji wykorzystania
 
 Kryteria funkcjonalne:
@@ -85,7 +219,46 @@ Kryteria pozafunkcjonalne:
 - Po wysłaniu wniosku komunikat trafia do operatora w ciągu 10 s (w 95% przypadków)
 - Odpowiedź trafia do klienta w ciągu 10 s od wysłania (w 95% przypadków)
 
-## Jako klient chcę dokonać płatności za przedłużenie wypożyczenia sprzętu za pośrednictwem platformy udostępnianej przez wypożyczalnię, aby zachować historię płatności w ramach tej platformy
+### Scenariusze testowe
+
+**Poprawne wysłanie wniosku**
+
+**Given:** System wyświetla dodatkowe informacje o sprzęcie (scenariusze testowe do "Jako klient chcę przeglądać listę wypożyczonego przeze mnie sprzętu wraz z informacją o terminie zwrotu, aby umiejętnie zagospodarować czas przeznaczony na wykorzystanie sprzętu")
+
+**And** Dany sprzęt nie jest zarezerwowany
+
+**When:** Użytkownik naciska przycisk przedłuż termin oddania
+
+**Then** Do operatora wysyłane jest powiadonienie o wniosku czekającym na rozpatrzenie
+
+**Próba złorzenia wniosku zakończona niepowodzeniem**
+
+**Given:** System wyświetla dodatkowe informacje o sprzęcie
+
+**And** Dany sprzęt jest zarezerwowany
+
+**When:** Użytkownik naciska przycisk przedłuż termin oddania
+
+**Then** System wyświetla informację o tym, że w danym terminie sprzęt jest zarezerwowany i sugeruje wybranie innej daty
+
+**Wniosek rozpatrzony pozytywnie**
+
+**Given:** Do operatora został wysłany wniosek o przedłużenie terminu oddania sptrzętu
+
+**When:** Operator pozytywnie rozpatruje wniosek
+
+**Then** Do użytkownika wysłany zostaje e-mail z informacją o pozytywnym rozparzeniu wniosku, oraz dodatkowych opłatach. W punkcie nawigacyjnym systemu pojawia się opcja dokonania płatności
+
+**Wniosek rozpatrzony negatywnie**
+
+**Given:** Do operatora został wysłany wniosek o przedłużenie terminu oddania sptrzętu
+
+**When:** Operator negatywnie rozpatruje wniosek
+
+**Then** Do użytkownika wysłany zostaje e-mail z informacją o negetywnym zozpatrzeniu wniosku oraz przypomnienie o terminie oddania
+
+
+## Jako klient chcę dokonać płatności za wypożyczenie sprzętu za pośrednictwem platformy udostępnianej przez wypożyczalnię, aby zachować historię płatności w ramach tej platformy
 
 Kryteria funkcjonalne:
 - Podczas etapu dokonywania płatności przy wypożyczaniu sprzętu jedną z opcji jest płatność kontem Rental-aid
@@ -95,6 +268,40 @@ Kryteria funkcjonalne:
 Kryteria pozafunkcjonalne:
 - Dla każdego użytkownika generowane jest konto w banku \<Nazwa Banku\>
 - Poprawnością i bezpieczeństwem przelewów z i na konto zajmuje się \<Nazwa Banku\>
+
+### Scenariusze testowe
+
+**Przelew na konto Rental-aid**
+
+**Given** Użytkownik posiada konto w systemie
+
+**When** Użytkownik przelewa środki na konto Renta-aid
+
+**Then** Środki są widoczne na stronie oraz w aplikacji mobilnej
+
+**Zapłata za wyporzyczenie sprzętu przy użyciu konta Renta-aid**
+
+**Given** Użytkownik posiada konto w systemie
+
+**And** Użytkownik wybrał konto rental-aid jako opcję płatności
+
+**And** Użytkownik posiada odpowidnią ilość środków na koncie
+
+**When** Naciska przycisk zapłać
+
+**Then** Wyporzyczenie zostaje opłacone, na koncie Rental-aid jest mniej środków
+
+**Próba zapłaty za wyporzyczenie sprzętu przy użyciu konta Renta-aid baz odpowiednich środków**
+
+**Given** Użytkownik posiada konto w systemie
+
+**And** Użytkownik wybrał konto rental-aid jako opcję płatności
+
+**And** Użytkownik nie posiada odpowidniej ilości środków na koncie
+
+**When** Naciska przycisk zapłać
+
+**Then** Wyporzyczenie pozostaje nieopłacone, system wyświetla informację o braku odpowiednich środków na koncie
 
 ## Jako klient chcę przeglądać dostępne w magazynie wyposażenie do wypożyczenia, aby móc w wyprzedzeniem określić swoje zamiary w kwestii wypożyczenia lub zarezerwować sprzęt lub wypożyczyć (z wydaniem sprzętu w punkcie stacjonarnym) 
 <!-- Jaka jest różnica miedzy wypożyczeniem a rezerwowaniem? -->
@@ -179,11 +386,13 @@ Kryteria funkcjonalne
 - System udostępnia opcję dodaj
 - Formularz dodawania zawiera obligatoryjne pola:
   - nazwa
+  - marka
   - kategoria
   - ilość
 - Formulaż zawiera nieobligatoryjne pola:
   - cena za wyporzyczenie
   - cena za dzień wyporzyczenia
+  - opis
 - System zapisuje sprzęty w bazie danych po zatwierdzeniu przez administratora
 - System generuje unikalne identyfikatory dla dodanych sprętów
 - Jeżeli istnieje już sprzęt o danym identyfikatorze to do jego ilości dodawana jest nowa ilość
