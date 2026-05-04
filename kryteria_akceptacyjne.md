@@ -269,16 +269,59 @@ Kryteria funkcjonalne:
 - System udostępnia mechanizm powiadamiania magazyniera o konieczności wydania sprzętu z magazynu na stanowisko operatora wypożyczeń, wyzwalany w momencie potwierdzenia wyboru sprzętu w formularzu wydania
 - System umożliwia zatwierdzenie wydania sprzętu
 
+### Scenariusze testowe
+
+**Sortowanie wg ceny wypożyczenia**
+
+**Given:** Lista sprzętu jest otwarta
+
+**When:** Operator wybiera sortowanie malejąco wg ceny wypożyczenia
+
+**Then:** Sprzęty na liście wyświetlane są od góry do dołu w kolejności od najniższej ceny wypożyczenia do najwyższej
+
 ## Jako operator wypożyczeń chcę zarejestrować zwrot sprzętu przez klienta, aby uregulować ewentualne należności z tytułu uszkodzeń sprzętu lub opóźnionego zwrotu oraz uaktualnić stan magazynowy
 
 Kryteria funkcjonalne:
 - System umożliwa wyszukanie klienta w bazie danych
 - System umożliwia wybranie klienta z bazy danych
 - System udostępnia listę sprzętu wypożyczonego przez wybranego klienta
-- System umożliwia wybranie sprzętu z listy sprzętów klienta celem przejścia do formularza zwrotu
+- System umożliwia wybranie jednego lub wielu sprzętów z listy sprzętów klienta celem przejścia do formularza zwrotu
 - System umożliwia odnotowywanie zaistniałych w wyniku eksploatacji przez klienta usterek w polu tekstowym
 - System automatycznie wypełnia pola 'data wypożycznia' i 'data zwrotu' zgodnie z zegarem systemowym
 - System automatycznie oblicza wysokość należności z tytułu opóźnień w zwrocie sprzętu
+- System pozwala odnotować, czy ewentualne należności wynikające z opóźnień są uregulowane w momencie zwrotu
+
+### Scenariusze testowe
+
+**Wybór sprzętu klienta do zwrotu**
+
+**Given:** Lista sprzętów klienta jest otwarta
+
+**When:** Operator wybiera zwracane wyposażenie z listy
+
+**Then:** Otwiera się formularz zwrotu z przypisanymi doń wybranymi sprzętami klienta
+
+---
+
+**Odnotowanie usterek sprzętu**
+
+**Given:** Formularz zwrotu jest otwarty
+
+**When:** Operator wybiera sprzęt z listy zwracanych sprzętów i dodaje do niego komentarz w polu dotyczącym usterek
+
+**Then:** System zapisuje komentarz i powraca do pierwotnego widoku formularza
+
+## Jako operator wypożyczeń chcę przeglądać całe wyposażenie należące do wypożyczalni
+
+---
+
+**Odnotowanie uiszczenia należności za opóźnienie w zwrocie**
+
+**Given:** Formularz zwrotu jest otwarty i klient zapłacił za opóźnienie
+
+**When:** Operator wybiera opcję 'Uregulowano należności za opóźniony zwrot'
+
+**Then:** Opcja 'Uregulowano należności za opóźniony zwrot' widnieje w formularzu jako zaznaczona
 
 ## Jako operator wypożyczeń chcę przeglądać całe wyposażenie należące do wypożyczalni
 
@@ -318,6 +361,26 @@ Kryteria funkcjonalne:
 
 **Then:** Sprzęty na liście wyświetlane są od góry do dołu w kolejności od najniższej ceny wypożyczenia do najwyższej
 
+---
+
+**Filtorowanie po kategorii**
+
+**Given:** Lista sprzętu jest otwarta
+
+**When:** Operator wybiera filtrowanie wg kategorii 'sporty zimowe'
+
+**Then:** Na liście wyświetlane są tylko sprzęty przypisane do kategorii 'sprzęty zimowe'
+
+---
+
+**Wyszukiwanie po frazie**
+
+**Given:** Lista sprzętu jest otwarta
+
+**When:** Operator wyszukuje po frazie 'kajak'
+
+**Then:** Na liście wyświetlane są tylko sprzęty zawierające w nazwie frazę 'kajak'
+
 ## Jako operator wypożyczeń chcę rozpatrywać wnioski klientów o przedłużenie wypożyczenia, aby równoważyć potrzeby klientów posiadających wypożyczony sprzęt oraz chcących wypożyczyć
 
 Kryteria funkcjonalne:
@@ -326,6 +389,32 @@ Kryteria funkcjonalne:
 - System umożliwia przejście do szczegółów wniosku
 - System umożliwia zatwierdzenie lub odrzucenie wniosku
 - System udostępnia opcję zatwierdzenia wniosku na krótszy niż wskazany we wniosku okres z opcjonalną zgodą klienta na skrócony okres przedłużenia (brak zgody klienta jest równoznaczny z odrzuceniem wniosku)
+
+### Scenariusze testowe
+
+**Rozpatrzenie wniosku o przedłużenie wypożyczenia**
+
+**Given:** Operator wybrał wniosek do rozpatrzenia
+
+**When:** Operator zatwierdza wniosek
+
+**Then:** Następuje zmiana daty zwrotu o wnioskowany okres i poinformowanie klienta przez SMS oraz powiadomienie z aplikacji
+
+---
+
+**Given:** Operator wybrał wniosek do rozpatrzenia
+
+**When:** Operator odrzuca wniosek
+
+**Then:** Klient jest informowany o odrzuceniu wniosku przez SMS oraz powiadomienie z aplikacji
+
+---
+
+**Given:** Operator wybrał wniosek do rozpatrzenia
+
+**When:** Operator proponuję wydłużenie o okres krótszy niż wnioskowany
+
+**Then:** Klient otrzymuje propozycję do akceptacji lub odrzucenia
 
 ## Jako operator wypożyczeń chciałbym mieć dostęp do historii wypożyczonych sprzętów klienta, aby móc lepiej doradzić klientowi w wyborze sprzętu
 
@@ -358,6 +447,17 @@ Kryteria funkcjonalne:
 - System umożliwia magazynierowi wybranie zlecenia
 - Wybrane zlecenie znika z listy zleceń i zmienia status na 'w realizacji'
 - System umożliwia potwierdzenie wydania sprzętu operatorowi wypożyczeń
+- W wyniku potwierdzenia wydania sprzęt zmienia status z 'dostępny' na 'wypożyczony'
+
+### Scenariusze testowe
+
+**Potwierdzenie wydania sprzętu operatorowi wypożyczeń**
+
+**Given:** Magazynier przyjął zlecenie wydania sprzętu operatorowi wypożyczeń
+
+**When:** Magazynier zatwierdził wydanie sprzętu
+
+**Then:** Sprzęt zmienia status z 'dostępny' na 'wypożyczony'
 
 ## Jako magazynier chcę potwierdzić odbiór sprzętu od operatora wypożyczeń, aby uaktualnić stan magazynowy
 Kryteria funkcjonalne:
@@ -365,6 +465,17 @@ Kryteria funkcjonalne:
 - System umożliwia magazynierowi wybranie zlecenia
 - Wybrane zlecenie znika z listy zleceń i zmienia status na 'w realizacji'
 - System umożliwia potwierdzenie odbioru sprzętu od operatora wypożyczeń
+- W wyniku potwierdzenia odbioru sprzęt zmienia status z 'wypożyczony' na 'dostępny'
+
+### Scenariusze testowe
+
+**Potwierdzenie odbioru sprzętu od operatora wypożyczeń**
+
+**Given:** Magazynier przyjął zlecenie odbioru sprzętu od operatora wypożyczeń
+
+**When:** Magazynier zatwierdził odbiór sprzętu
+
+**Then:** Sprzęt zmienia status z 'wypożyczony' na 'dostępny'
 
 ## Jako magazynier chcę zgłaszać sprzęt do naprawy, aby utrzymać jego przydatność do użycia
 Kryteria funkcjonalne
@@ -372,8 +483,35 @@ Kryteria funkcjonalne
 - Formularz naprawy zawiera:
   - pole na identyfikator sprzętu
   - pole na komentarz dotyczący wymaganych napraw
-- Po zatwierdzeniu formularza system oznacza sprzęt statusem 'w naprawie'
+- Po zatwierdzeniu formularza system oznacza sprzęt statusem 'do naprawy'
 - System zapisuje czas utworzenia formularza
+- W przypadku podania błędnego identyfikatora (brak sprzętu o takim id w magazynie) lub zostawienia pola komentarza pustym, system odrzuca formularz i podświetla niewłaściwie zapełnione pola
+
+### Scenariusze testowe
+
+**Zgłoszenie sprzętu do naprawy**
+
+**Given:** Formularz naprawy jest otwarty i poprawnie wypełniony
+
+**When:** Magazynier zatwierdził formularz
+
+**Then:** Sprzęt zmienia status z 'dostępny' na 'do naprawy', system zapisuje czas utworzenia formularza
+
+---
+
+**Given:** Formularz naprawy jest otwarty i pole identyfikatora nie odpowiada żadnemu sprzętowi spośród tych o statusie 'dostępny'
+
+**When:** Magazynier zatwierdził formularz
+
+**Then:** Podświetlone zostaje pole identyfikatora ze wskazaniem, że nie ma dostępnego sprzętu o takim identyfikatorze
+---
+
+**Given:** Formularz naprawy jest otwarty i pole komentarza jest puste'
+
+**When:** Magazynier zatwierdził formularz
+
+**Then:** Podświetlone zostaje pole komentarza ze wskazaniem, że to pole nie może być puste
+
 
 ## Jako magazynier chcę zatwierdzać oddanie sprzętu do naprawy, aby uaktualnić stan magazynowy
 Kryteria funkcjonalne:
@@ -381,6 +519,17 @@ Kryteria funkcjonalne:
 - System umożliwia magazynierowi wybranie zlecenia
 - Wybrane zlecenie znika z listy zleceń
 - System umożliwia potwierdzenie wydania sprzętu podmiotowi realizującemu naprawę
+- W wyniku potwierdzenia oddania sprzęt zmienia status z 'do naprawy' na 'w naprawie'
+
+### Scenariusze testowe
+
+**Potwierdzenie oddania sprzętu do naprawy**
+
+**Given:** Magazynier przyjął zlecenie przekazania kajaka do naprawy
+
+**When:** Magazynier potwierdził oddanie sprzętu
+
+**Then:** Sprzęt zmienia status z 'do naprawy' na 'w naprawie'
   
 ## Jako magazynier chcę potwierdzić odebranie sprzętu po naprawie, aby uaktualnić stan magazynowy
 Kryteria funkcjonalne:
@@ -388,3 +537,14 @@ Kryteria funkcjonalne:
 - System umożliwia magazynierowi wybranie zlecenia
 - Wybrane zlecenie znika z listy zleceń
 - System umożliwia potwierdzenie odbioru sprzętu od podmiotu realizującego naprawę
+- W wyniku potwierdzenia odbioru sprzęt zmienia status z 'w naprawie' na 'dostępny'
+
+### Scenariusze testowe
+
+**Potwierdzenie odbioru sprzętu z naprawy**
+
+**Given:** Magazynier przyjął zlecenie odbioru kajaka z naprawy
+
+**When:** Magazynier zatwierdził odbiór sprzętu
+
+**Then:** Sprzęt zmienia status z 'w naprawie' na 'dostępny'
