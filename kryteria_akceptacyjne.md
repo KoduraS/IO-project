@@ -599,8 +599,6 @@ Kryteria funkcjonalne:
 
 **Then:** System zapisuje komentarz i powraca do pierwotnego widoku formularza
 
-## Jako operator wypożyczeń chcę przeglądać całe wyposażenie należące do wypożyczalni
-
 ---
 
 **Odnotowanie uiszczenia należności za opóźnienie w zwrocie**
