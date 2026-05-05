@@ -75,7 +75,7 @@ Kryteria pozafunkcjonalne:
 
 **Then:** System wyświetla komunikat o tym, że konto na dany e-mail już istnieje i przekierowuje na stronę logowania
 
-
+  
 
 ## Jako klient chcę móc się zalogować do systemu aby móc korzystać z usług wypożyczalni
 
@@ -519,6 +519,9 @@ Kryteria funkcjonalne:
 - System udostępnia mechanizm powiadamiania magazynierów o konieczności wydania sprzętu z magazynu na stanowisko operatora wypożyczeń, wyzwalany w momencie potwierdzenia wyboru sprzętu w formularzu wydania
 - System umożliwia zatwierdzenie wydania sprzętu
 
+Kryteria pozafunkcjonalne:
+- Wyszukanie sprzętu do wydania zajmuje nie dłużej niż 3 sekundy (w 95% przypadków)
+
 ### Scenariusze testowe
 
 **Dodanie klienta**
@@ -579,6 +582,9 @@ Kryteria funkcjonalne:
 - System automatycznie oblicza wysokość należności z tytułu opóźnień w zwrocie sprzętu
 - System pozwala odnotować, czy ewentualne należności wynikające z opóźnień są uregulowane w momencie zwrotu
 
+Kryteria pozafunkcjonalne:
+- Wyszukiwanie klienta zajmuje nie dłużej niż 3 sekundy od podania danych go indentyfikujących (w 99% przypadków)
+
 ### Scenariusze testowe
 
 **Wybór sprzętu klienta do zwrotu**
@@ -636,6 +642,9 @@ Kryteria funkcjonalne:
 - Sytem umożliwia sortowanie wg wielu kryteriów jednocześnie, wg wybranej hierarchi priorytetowości poszczególnych kryteriów
 - System umożliwia rozpoczęcie procedury rejestracji wydania sprzętu z poziomu przeglądu szczegółów konkretnego sprzętu, pod warunkiem, że sprzęt jest dostępny
 - System udostępnia historię sprzętu z poziomu przeglądu szczegółów sprzętu
+
+Kryteria pozafunkcjonalne:
+- System pobiera listę sprzętu w czasie niedłużśzym niż 5 sekund (w 95% przypadków)
 
 ### Scenariusze testowe
 
@@ -745,6 +754,9 @@ Kryteria funkcjonalne:
 - System umożliwia potwierdzenie wydania sprzętu operatorowi wypożyczeń
 - W wyniku potwierdzenia wydania sprzęt zmienia status z 'w drodze do operatora' na 'czeka na wydanie klientowi'
 
+Kryteria pozafunkcjonalne:
+- Zmiana statusu następuje w czasie nie dłuższym niż 3 sekundy (w 99% przypadków)
+
 ### Scenariusze testowe
 
 **Potwierdzenie wydania sprzętu operatorowi wypożyczeń**
@@ -764,6 +776,9 @@ Kryteria funkcjonalne:
 - System umożliwia potwierdzenie odbioru sprzętu od operatora wypożyczeń
 - W wyniku potwierdzenia odbioru sprzęt zmienia status z 'czeka na wydanie magazynierowi' na 'w drodze do magazynu'
 - W wyniku potwierdzenia zwrotu sprzętu do magazynu sprzęt zmienia status z 'w drodze do magazynu' na dostępny'
+
+Kryteria pozafunkcjonalne:
+- Zmiana statusu następuje w czasie nie dłuższym niż 3 sekundy (w 99% przypadków)
 
 ### Scenariusze testowe
 
@@ -795,6 +810,9 @@ Kryteria funkcjonalne
 - System zapisuje czas utworzenia formularza
 - W przypadku podania błędnego identyfikatora (brak sprzętu o takim id w magazynie) lub zostawienia pola komentarza pustym, system odrzuca formularz i podświetla niewłaściwie zapełnione pola
 
+Kryteria pozafunkcjonalne:
+- Zmiana statusu następuje w czasie nie dłuższym niż 3 sekundy (w 99% przypadków)
+
 ### Scenariusze testowe
 
 **Zgłoszenie sprzętu do naprawy**
@@ -825,9 +843,12 @@ Kryteria funkcjonalne
 Kryteria funkcjonalne:
 - System udostępnia listę zleceń wydania sprzętu do naprawy
 - System umożliwia magazynierowi wybranie zlecenia
-- Wybrane zlecenie znika z listy zleceń
+- Wybrane zlecenie znika z listy zleceń i zmienia status na 'w realizacji'
 - System umożliwia potwierdzenie wydania sprzętu podmiotowi realizującemu naprawę
 - W wyniku potwierdzenia oddania sprzęt zmienia status z 'do naprawy' na 'w naprawie'
+
+Kryteria pozafunkcjonalne:
+- Zmiana statusu następuje w czasie nie dłuższym niż 3 sekundy (w 99% przypadków)
 
 ### Scenariusze testowe
 
@@ -843,9 +864,12 @@ Kryteria funkcjonalne:
 Kryteria funkcjonalne:
 - System udostępnia listę zleceń odbioru sprzętu z naprawy
 - System umożliwia magazynierowi wybranie zlecenia
-- Wybrane zlecenie znika z listy zleceń
+- Wybrane zlecenie znika z listy zleceń i zmienia status na 'w realizacji'
 - System umożliwia potwierdzenie odbioru sprzętu od podmiotu realizującego naprawę
 - W wyniku potwierdzenia odbioru sprzęt zmienia status z 'w naprawie' na 'dostępny'
+
+Kryteria pozafunkcjonalne:
+- Zmiana statusu następuje w czasie nie dłuższym niż 3 sekundy (w 99% przypadków)
 
 ### Scenariusze testowe
 
