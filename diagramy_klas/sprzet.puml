@@ -1,6 +1,6 @@
 @startuml sprzet
 
-	class "Etykieta" as E {
+	class "Etykieta" as ETY {
 		- nazwa : String
 		- marka : Marka
 		- opis : String
@@ -12,12 +12,12 @@
 		- cenaZaOpoznienieZaDzien : double
 	}
 
-	class "Marka" as M {
+	class "Marka" as MAR {
 		- nazwa : String
 		- etykiety : Set<Etykieta>
 	}
 
-	class "Kategoria" as K {
+	class "Kategoria" as KAT {
 		- nazwa : String
 		- etykiety : Set<Etykieta>
 		- cenaZaDzien : double
@@ -26,7 +26,7 @@
 		- cenaZaOpoznienieZaDzien : double
 	}
 
-	class "Sprzet" as S {
+	class "Sprzet" as SPR {
 		- id : int
 		- dniEksploatacji : int
 		- etykieta : Etykieta
@@ -39,7 +39,7 @@
 		- {static} domyslnaCenaZaOpoznienieZaDzien : double
 	}
 
-	enum "SprzetStatus" as SS {
+	enum "SprzetStatus" as SPS {
 		W_DRODZE_DO_OPERATORA
 		W_MAGAZYNIE
 		CZEKA_NA_WYDANIE_KLIENTOWI
@@ -50,7 +50,7 @@
 	}
 
 
-	class "Wypozycenie" as W {
+	class "Wypozycenie" as WYP {
 		- start : Date
 		- end : Date
 		- wplacono : double
@@ -60,7 +60,7 @@
 		- status : WypozycenieStatus
 	}
 
-	enum "WypozycenieStatus" as WS {
+	enum "WypozycenieStatus" as WYS {
 		REZERWACJA
 		W_TRAKCIE
 		OPLACONE
@@ -71,7 +71,7 @@
 
 
 
-	class "Admin" as A {
+	class "Admin" as ADM {
 		- login : String
 		- haslo : String
 		+ sprawdzHaslo(String) : boolean
@@ -98,7 +98,7 @@
 		+ dodajPracownika(Pracownik) : void
 	}
 
-	class "Pracownik" as P {
+	class "Pracownik" as PRA {
 		- imie : String
 		- nazwisko : String
 		- nrTel : String
@@ -107,7 +107,7 @@
 		+ sprawdzHaslo(String) : boolean
 	}
 
-	class "Klient" as KL {
+	class "Klient" as KLI {
 		- imie : String
 		- nazwisko : String
 		- dokument : String
@@ -124,25 +124,25 @@
 		+ oplac(Wypozycenie) : void
 	}
 
-	class "Magazynier" as MA {
+	class "Magazynier" as MAG {
 		- przyjeteZleceia : Set<Zlecenie>
 		+ przyjmijZlecenie(Zlecenie) : void
 		+ zrealizujZlecenie(Zlecenie) : void
 	}
 
-	class "PracownikBiurowy" as PB {
+	class "PracownikBiurowy" as PBI {
 		+ dodajKlienta(Klient) : void
 		+ wydajSprzet(Klient, Sprzet) : void
 		+ przyjmijSprzet(Klient, Sprzet) : void
 	}
 
-	class "Platnosc" as PL {
+	class "Platnosc" as PLA {
 		- data : Date
 		- wypozycenie : Wypozycenie
 		- kwota : double
 	}
 
-	class "Wniosek" as WN {
+	class "Wniosek" as WNI {
 		- nowaData : Date
 		- klient : Klient
 		- wypozycenie : Wypozycenie
@@ -158,49 +158,49 @@
 		ROZPATRZONY_CZESCIOWO_POZYTYWNIE
 	}
 
-	class "Zlecenie" as Z {
+	class "Zlecenie" as ZLE {
 		- status : ZlecenieStatus
 		- sprzet : Sprzet
 	}
  
-	enum "ZlecenieStatus" as ZS {
+	enum "ZlecenieStatus" as ZLS {
 		WYDANIE
 		ODBIOR
 	}
 
-	S o--o E
+	SPR o--o ETY
 
-	E o--o M
+	ETY o--o MAR
 
-	E o--o K
+	ETY o--o KAT
 
-	S o--o W
+	SPR o--o WYP
 
-	WS --o W
+	WYS --o WYP
 
-	KL o--o W
+	KLI o--o WYP
 
-	A -- PB
+	ADM -- PBI
 
-	PB -- KL
+	PBI -- KLI
 
-	KL o-- PL
-	PB -- PL
-	PL o-- W
+	KLI o-- PLA
+	PBI -- PLA
+	PLA o-- WYP
 
-	WN o--o KL
-	WN -- PB
-	WN o-- W
-	WNS --o WN
+	WNI o--o KLI
+	WNI -- PBI
+	WNI o-- WYP
+	WNS --o WNI
 
-	MA --|> P
-	PB --|> P
+	MAG --|> PRA
+	PBI --|> PRA
 
-	SS --o S
+	SPS --o SPR
 
-	ZS --o Z
-	Z -- MA
-	Z --o S
-	MA -- S
+	ZLS --o ZLE
+	ZLE -- MAG
+	ZLE --o SPR
+	MAG -- SPR
 
 @enduml
