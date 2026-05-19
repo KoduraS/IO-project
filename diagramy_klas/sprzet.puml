@@ -1,0 +1,193 @@
+@startuml sprzet
+
+	class "Etykieta" as E {
+		- nazwa : String
+		- marka : Marka
+		- opis : String
+		- kategoria : Kategoria
+		- sprzety : Set<Sprzet>
+		- cenaZaDzien : double
+		- cenaZaWyporzyczenie : double 
+		- cenaZaOpoznienie : double
+		- cenaZaOpoznienieZaDzien : double
+	}
+
+	class "Marka" as M {
+		- nazwa : String
+		- etykiety : Set<Etykieta>
+	}
+
+	class "Kategoria" as K {
+		- nazwa : String
+		- etykiety : Set<Etykieta>
+		- cenaZaDzien : double
+		- cenaZaWyporzyczenie : double
+		- cenaZaOpoznienie : double
+		- cenaZaOpoznienieZaDzien : double
+	}
+
+	class "Sprzet" as S {
+		- id : int
+		- dniEksploatacji : int
+		- etykieta : Etykieta
+		- wypozycony : boolean
+		- wNaprawie : boolean
+		- wypozycenie : Optional<Wypozycenie>
+		- wypozycenia : Set<Wypozycenie>
+		- {static} domyslnaCenaZaDzien : double
+		- {static} domyslnaCenaZaWyporzyczenie : double
+		- {static} domyslnaCenaZaOpoznienie : double
+		- {static} domyslnaCenaZaOpoznienieZaDzien : double
+	}
+
+
+	class "Wypozycenie" as W {
+		- start : Date
+		- end : Date
+		- wplacono : double
+		- doZaplaty : double
+		- sprzet : Sprzet
+		- klient : Klient
+		- status : WypozycenieStatus
+	}
+
+	enum "WypozycenieStatus" as WS {
+		REZERWACJA
+		W_TRAKCIE
+		OPLACONE
+		NIE_OPLACONE
+		PRZEKROCZONO_TERMIN
+	}
+
+
+
+
+	class "Admin" as A {
+		- login : String
+		- haslo : String
+		+ sprawdzHaslo(String) : boolean
+
+		+ ustawCeneZaDzienDlaKategorii(Kategoria, double) : void
+		+ ustawCeneZaDzienDlaEtykiety(Etykieta, double) : void
+		+ ustawCeneDomyslnaZaDzien(double) : void
+		+ ustawCeneZaWypozycenieDlaKategorii(Kategoria, double) : void
+		+ ustawCeneZaWypozycenieDlaEtykiety(Etykieta, double) : void
+		+ ustawCeneDomyslnaZaWypozycenie(double) : void
+
+		+ ustawCenaZaOpoznienieDlaKategorii(Kategoria, double) : double
+		+ ustawCenaZaOpoznienieZaDzienDlaKategorii(Kategoria, double) : double
+		+ ustawCenaZaOpoznienieDlaEtykiety(Etykieta, double) : double
+		+ ustawCenaZaOpoznienieZaDzienDlaEtykiety(Etykieta, double) : double
+		+ ustawCenaDomyslnaZaOpoznienie(double) : double
+		+ ustawCenaDomyslnaZaOpoznienieZaDzien(double) : double
+
+		+ dodajSprzet(Etykieta, int) : void
+		+ dodajEtykiete(Etykieta) : void
+		+ dodajMarke(Marka) : void
+		+ dodajKategorie(Kategoria) : void
+
+		+ dodajPracownika(Pracownik) : void
+	}
+
+	class "Pracownik" as P {
+		- imie : String
+		- nazwisko : String
+		- nrTel : String
+		- dokument : String
+		- stanowisko : String
+		+ sprawdzHaslo(String) : boolean
+	}
+
+	class "Klient" as KL {
+		- imie : String
+		- nazwisko : String
+		- dokument : String
+		- email : String
+		- haslo : String
+		- nrTel : Optional<String>
+		- adres : Optional<String>
+		- blokada : Date
+		- wypozycenia : Set<Wypozycenie>
+		- platnosci : Set<Platnosc>
+		- wnioseki : Set<Wniosek>
+		+ sprawdzHaslo(String) : boolean
+		+ zablokuj(Date) : void
+		+ oplac(Wypozycenie) : void
+	}
+
+	class "Magazynier" as MA
+
+	class "PracownikBiurowy" as PB {
+		+ dodajKlienta(Klient) : void
+		+ wydajSprzet(Klient, Sprzet) : void
+		+ przyjmijSprzet(Klient, Sprzet) : void
+	}
+
+	class "Platnosc" as PL {
+		- data : Date
+		- wypozycenie : Wypozycenie
+		- kwota : double
+	}
+
+	class "Wniosek" as WN {
+		- nowaData : Date
+		- klient : Klient
+		- wypozycenie : Wypozycenie
+		- status : WniosekStatus
+		+ rozpatrz(boolean) : void
+		+ rozpatrz(Date) : void
+	}
+
+	enum "WniosekStatus" as WNS {
+		NIEROZPATRZONY
+		ROZPATRZONY_POZYTYWNIE
+		ROZPATRZONY_NEGATYWNIE
+		ROZPATRZONY_CZESCIOWO_POZYTYWNIE
+	}
+
+	' class "Zlecenie" as Z
+
+	' enum "ZlecenieStatus" as ZS {
+	' 	W_REALIZACJI
+	' 	W_DRODZE_DO_OPERATORA
+	' 	CZEKA_NA_WYDANIE_KLIENTOWI
+	' 	ZLECONY_DO_ODBIORU
+	' 	CZEKA_NA_WYDANIE_MAGAZYNIEROWI
+	' 	W_DORODZE_DO_MAGAZYNU
+	' }
+
+	S o--o E
+
+	E o--o M
+
+	E o--o K
+
+	S o--o W
+
+	WS --o W
+
+	KL o--o W
+
+	A -- PB
+
+	PB -- KL
+
+	KL o-- PL
+	PB -- PL
+	PL o-- W
+
+	WN o--o KL
+	WN -- PB
+	WN o-- W
+	WNS --o WN
+	' A -up- E
+	' A -up- K
+
+	MA --|> P
+	PB --|> P
+
+	' Z -- MA
+	' Z -- S
+	' ZS -- Z
+
+@enduml
